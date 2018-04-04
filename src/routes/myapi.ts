@@ -23,4 +23,12 @@ router.get('/name', (req, res, next) => {
   });
 });
 
+router.get('/params/:id', (req, res, next) => {
+  res.send({ 
+      ok: true, 
+      name: 'สาธิต', 
+      sername: 'สีถาพล' 
+  });
+});
+
 export default router;

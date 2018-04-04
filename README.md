@@ -5,17 +5,12 @@
 update config connection db in `.env` for production
 
 ```
-DB_HOST=db1
+DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_NAME=mmis_purchasing
+DB_NAME=kpi
 DB_USER=dixon
-DB_PASSWORD=_satit@10670
+DB_PASSWORD=123456
 
 
 PORT=3009
-```
-run command
-
-```
-sh build.sh
 ```
