@@ -10,8 +10,8 @@ import { log } from 'util';
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.send({ ok: true, message: 'KPI API Server' });
+router.get('/', (req,res,next) => {
+  res.render('index', {title: 'Express'});
 });
 
 router.get('/version', (req, res, next) => {

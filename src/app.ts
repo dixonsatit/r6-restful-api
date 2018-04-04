@@ -1,5 +1,8 @@
 'use strict';
 require('dotenv').config();
+import Knex = require('knex');
+import { MySqlConnectionConfig } from 'knex';
+import { Jwt } from './models/jwt';
 
 import * as express from 'express';
 import * as path from 'path';
@@ -8,10 +11,7 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
-
-import Knex = require('knex');
-import { MySqlConnectionConfig } from 'knex';
-import { Jwt } from './models/jwt';
+import * as ejs from 'ejs';
 
 import indexRoute from './routes/index';
 import contactRoute from './routes/contact';
@@ -57,6 +57,12 @@ let dbConnection: MySqlConnectionConfig = {
 }
 
 const app: express.Express = express();
+
+//view engine setup
+app.set('views', path.join(__dirname, '../views'));
+app.engine('.html', ejs.renderFile);
+app.set('view engine', 'html');
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
