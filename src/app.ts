@@ -14,6 +14,7 @@ import { MySqlConnectionConfig } from 'knex';
 import { Jwt } from './models/jwt';
 
 import indexRoute from './routes/index';
+import contactRoute from './routes/contact';
 import loginRoute from './routes/login';
 import kpiList from './routes/kpiList';
 import kpiSum from './routes/kpiSum';
@@ -94,10 +95,12 @@ app.use((req, res, next) => {
 });
 
 app.use('/login', loginRoute);
+app.use('/contacts',checkAuth, contactRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum', kpiSum);
 app.use('/myapi', myApi);
 app.use('/', indexRoute);
+
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -105,6 +108,19 @@ app.use((req, res, next) => {
   err['status'] = 404;
   next(err);
 });
+
+//development error handler
+//will print stacktrace
+if (process.env.NODE_ENV === 'development') {
+  app.use((err: Error, req, res, next) => {
+    res.status(err['status'] || 500);
+    res.render('error', {
+      title: 'error',
+      message: err.message,
+      error: err
+    });
+  });
+}
 
 app.use((err: Error, req, res, next) => {
   res.status(err['status'] || 500);
