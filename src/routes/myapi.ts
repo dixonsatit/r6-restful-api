@@ -23,11 +23,30 @@ router.get('/name', (req, res, next) => {
   });
 });
 
-router.get('/params/:id', (req, res, next) => {
+router.post('/save', (req, res, next) => {
+  let name = req.body.name;
+  let sername = req.body.sername;
   res.send({ 
       ok: true, 
-      name: 'สาธิต', 
-      sername: 'สีถาพล' 
+      name: name, 
+      sername: sername
+  });
+});
+
+//http://127.0.0.1:3000/myapi/params/4/abc?age=56
+router.get('/params/:id/:name', (req, res, next) => {
+  let id = req.params.id;
+  let name = req.params.name;
+
+  let age = req.query.age;
+
+  res.send({ 
+      ok: true, 
+      id:id,
+      name: name, 
+      sername: 'สีถาพล',
+      age: age
+      
   });
 });
 

@@ -101,9 +101,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/login', loginRoute);
-app.use('/contacts',checkAuth, contactRoute);
+app.use('/contacts', contactRoute);
 app.use('/kpilist',checkAuth, kpiList);
-app.use('/kpisum', kpiSum);
+app.use('/kpisum',checkAuth, kpiSum);
 app.use('/myapi', myApi);
 app.use('/', indexRoute);
 

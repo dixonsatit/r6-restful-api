@@ -9,6 +9,19 @@ const router = express.Router();
 
 const model = new ContactModel();
 
+router.get('/rawquery', (req, res, next) => {
+  let db = req.db;
+  let id = req.query.id;
+  model.rawQuery(db,id)
+    .then((results: any) => {
+      res.send({ ok: true, rows: results[0] });
+    })
+    .catch(error => {
+      res.send({ ok: false, error: error })
+    });
+});
+
+
 router.get('/', (req, res, next) => {
 
   let db = req.db;
@@ -47,9 +60,11 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   let id = req.params.id;
+ 
   let name = req.body.name;
   let email = req.body.email;
   let mobile_number = req.body.mobile_number;
+  
   let db = req.db;
 
   if (id) {

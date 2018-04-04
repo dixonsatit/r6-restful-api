@@ -6,6 +6,11 @@ export class ContactModel {
   public tableName  = 'contacts';
   public primaryKey = 'id';
 
+  rawQuery(knex: Knex,id: number) {
+    let sql:string = `select * from contacts where id = ?`;
+    return knex.raw(sql,[id]);
+  }
+
   list(knex: Knex, limit: number = 100, offset: number = 0) {
     return knex(this.tableName)
       .limit(limit)

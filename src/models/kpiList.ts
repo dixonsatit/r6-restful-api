@@ -8,6 +8,12 @@ export class KpiListModel {
 
   list(knex: Knex, limit: number = 100, offset: number = 0) {
     return knex(this.tableName)
+      .select('kpi_year','kpi_level')
+      .where({
+        'kpi_level':'กรม'
+      })
+      .where('kpi_year','>=',2560)
+      //.whereRaw('kpi_year >= 2560')
       .limit(limit)
       .offset(offset);
   }
