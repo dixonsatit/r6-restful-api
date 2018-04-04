@@ -27,4 +27,38 @@ router.get('/bykpi/:kpiId', (req, res, next) => {
   });
 });
 
+router.get('/byProvince/:provcode/:year', (req, res, next) => {
+  let year = req.params.year;
+  let provcode = req.params.provcode;
+  let db = req.db;
+
+  model.byProvince(db,provcode,year)
+    .then((results: any) => {
+      res.send({ ok: true, rows: results })
+    })
+    .catch(error => {
+      res.send({ ok: false, error: error })
+    })
+    .finally(() => {
+      db.destroy();
+  });
+});
+
+router.get('/byHospcode/:hospcode/:year', (req, res, next) => {
+  let year = req.params.year;
+  let hospcode = req.params.hospcode;
+  let db = req.db;
+
+  model.byHospcode(db,hospcode,year)
+    .then((results: any) => {
+      res.send({ ok: true, rows: results })
+    })
+    .catch(error => {
+      res.send({ ok: false, error: error })
+    })
+    .finally(() => {
+      db.destroy();
+  });
+});
+
 export default router;

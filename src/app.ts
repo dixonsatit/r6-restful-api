@@ -12,31 +12,15 @@ import * as cors from 'cors';
 import Knex = require('knex');
 import { MySqlConnectionConfig } from 'knex';
 import { Jwt } from './models/jwt';
-const jwt = new Jwt();
-const protect = require('@risingstack/protect');
 
 import indexRoute from './routes/index';
 import loginRoute from './routes/login';
 import kpiList from './routes/kpiList';
 import kpiSum from './routes/kpiSum';
+import myApi from "./routes/myapi";
 
-const app: express.Express = express();
-
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(cors());
-
-app.use(protect.express.sqlInjection({
-  body: true,
-  loggerFunction: console.error
-}));
-
-app.use(protect.express.xss({
-  body: true,
-  loggerFunction: console.error
-}));
+const jwt = new Jwt();
+const protect = require('@risingstack/protect');
 
 let checkAuth = (req, res, next) => {
   let token: string = null;
@@ -71,6 +55,24 @@ let dbConnection: MySqlConnectionConfig = {
   multipleStatements: true
 }
 
+const app: express.Express = express();
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(cors());
+
+app.use(protect.express.sqlInjection({
+  body: true,
+  loggerFunction: console.error
+}));
+
+app.use(protect.express.xss({
+  body: true,
+  loggerFunction: console.error
+}));
+
 app.use((req, res, next) => {
   req.db = Knex({
     client: 'mysql',
@@ -94,6 +96,7 @@ app.use((req, res, next) => {
 app.use('/login', loginRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum', kpiSum);
+app.use('/myapi', myApi);
 app.use('/', indexRoute);
 
 //catch 404 and forward to error handler

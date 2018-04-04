@@ -4,8 +4,8 @@ import * as moment from 'moment';
 export class UserModel {
 
   changePassword(knex: Knex, userId: any, password: any) {
-    return knex('um_users')
-      .where('user_id', userId)
+    return knex('user')
+      .where('id', userId)
       .update({
         password: password
       });
