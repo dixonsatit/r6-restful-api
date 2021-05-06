@@ -20,7 +20,7 @@
         "json2xls": "^0.1.2",
         "jsonwebtoken": "^8.1.0",
         "knex": "^0.14.2",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.21",
         "moment": "^2.20.1",
         "morgan": "^1.9.0",
         "mysql": "^2.15.0",
