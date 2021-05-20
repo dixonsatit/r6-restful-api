@@ -16,7 +16,7 @@
         "express-validator": "^4.3.0",
         "fs-extra": "^5.0.0",
         "gutenberg-css": "^0.4.4",
-        "html-pdf": "^2.2.0",
+        "html-pdf": "^3.0.1",
         "json2xls": "^0.1.2",
         "jsonwebtoken": "^8.1.0",
         "knex": "^0.14.2",
