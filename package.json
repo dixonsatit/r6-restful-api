@@ -18,7 +18,7 @@
         "gutenberg-css": "^0.4.4",
         "html-pdf": "^2.2.0",
         "json2xls": "^0.1.2",
-        "jsonwebtoken": "^8.1.0",
+        "jsonwebtoken": "^9.0.0",
         "knex": "^0.14.2",
         "lodash": "^4.17.4",
         "moment": "^2.20.1",
